@@ -41,6 +41,12 @@ async def help(event):
     pass
 
 
+@bot.on(events.NewMessage(pattern="/login"))
+async def login(event):
+    # logging in...
+    pass
+
+
 # @bot.on(events.NewMessage)
 # async def echo(event):
 #     await event.respond(event.text)
