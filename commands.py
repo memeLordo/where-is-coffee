@@ -1,8 +1,13 @@
 import asyncio
 
+# import pandas as pd
 from telethon import events
 
 from config import ASK_KEYS, bot
+
+
+def check_db():
+    pass
 
 
 async def ask_for_keys(event):
@@ -13,6 +18,7 @@ async def ask_for_keys(event):
 
 @bot.on(events.NewMessage(pattern="/start"))
 async def start(event):
+    check_db()
     # ask for keys
     # save keys into .env.client
     # login in client via .env.client
