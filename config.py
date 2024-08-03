@@ -8,3 +8,5 @@ bot_hash = env_config["BOT_HASH"]
 bot_token = env_config["BOT_TOKEN"]
 
 bot = TelegramClient("bot", bot_id, bot_hash).start(bot_token=bot_token)
+
+ASK_KEYS = ""
