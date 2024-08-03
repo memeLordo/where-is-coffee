@@ -35,6 +35,12 @@ async def search(event):
     pass
 
 
+@bot.on(events.NewMessage(pattern="/help"))
+async def help(event):
+    # display help...
+    pass
+
+
 # @bot.on(events.NewMessage)
 # async def echo(event):
 #     await event.respond(event.text)
