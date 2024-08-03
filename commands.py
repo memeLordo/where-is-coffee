@@ -11,9 +11,8 @@ async def start(event):
 
 @bot.on(events.NewMessage(pattern="/search"))
 async def search(event):
-    # login in client via .env.client
-    # from the account start searching fo
-    await event.respond("Hi!")
+    # searching...
+    pass
 
 
 # @bot.on(events.NewMessage)
