@@ -6,8 +6,8 @@ name = "pypi"
 [packages]
 python-dotenv = "==1.0.1"
 telethon = "==1.36.0"
-pandas = "==2.2.2"
 loguru = "==0.7.2"
+sqlalchemy = "==2.0.32"
 
 [dev-packages]
 

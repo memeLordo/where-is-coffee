@@ -4,5 +4,5 @@
 *.json
 .env*
 __pycache__
-test.py
-*.csv
+test*.py
+*.db
