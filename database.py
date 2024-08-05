@@ -1,11 +1,12 @@
 import pandas as pd
 
-try:
-    db = pd.read_csv("keys.csv", index_col=0)
-except FileNotFoundError:
-    db = pd.DataFrame(columns=["TELEGRAM_ID", "API_ID", "API_HASH"])
-    db.to_csv("keys.csv")
 
+def start_db():
+    try:
+        db = pd.read_csv("keys.csv", index_col=0)
+    except FileNotFoundError:
+        db = pd.DataFrame(columns=["TELEGRAM_ID", "API_ID", "API_HASH"])
+        db.to_csv("keys.csv")
 
 def convert_to_form(telegram_id, api_id, api_hash):
     return pd.DataFrame(
@@ -28,7 +29,7 @@ def show_db():
 # row1 = convert_to_form(11, 12, "lol1")
 # add_to_db(row1)
 # print(show_db())
-#
-#
+
+
 def check_db(id):
     return pd.isnull(db.loc[id])
