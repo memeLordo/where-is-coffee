@@ -19,7 +19,8 @@ async def start(event):
     # login in client via .env.client
     # from the account start searching for chats
     # return links for chats
-    await ask_for_keys(event)
+
+    # sender = await event.get_sender()
     check_db(event.sender_id)
     await event.respond("Hi!")
     raise events.StopPropagation
@@ -40,6 +41,7 @@ async def help(event):
 @bot.on(events.NewMessage(pattern="/login"))
 async def login(event):
     # logging in...
+    await ask_for_keys(event)
     pass
 
 
