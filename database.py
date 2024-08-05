@@ -14,5 +14,12 @@ def convert_to_form(telegram_id, api_id, api_hash):
     )
 
 
+def add_to_db(row):
+    global db
+    db = pd.concat([db, row], ignore_index=True)
+    db = db.dropna().drop_duplicates()
+    db.to_csv("keys.csv", index=False)
+
+
 def check_db(id):
     return db.loc[id]
