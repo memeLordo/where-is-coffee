@@ -49,6 +49,6 @@ async def login(event):
     pass
 
 
-@bot.on(events.NewMessage)
-async def echo(event):
-    await event.respond(event.text)
+# @bot.on(events.NewMessage)
+# async def echo(event):
+#     await event.respond(event.text)
