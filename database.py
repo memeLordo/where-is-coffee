@@ -21,5 +21,9 @@ def add_to_db(row):
     db.to_csv("keys.csv", index=False)
 
 
+def show_db():
+    return db.loc[:, ["TELEGRAM_ID", "API_ID", "API_HASH"]]
+
+
 def check_db(id):
     return db.loc[id]
