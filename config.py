@@ -1,3 +1,5 @@
+from enum import Enum
+
 from dotenv import dotenv_values
 from telethon import TelegramClient
 
@@ -9,4 +11,10 @@ bot_token = env_config["BOT_TOKEN"]
 
 bot = TelegramClient("bot", bot_id, bot_hash).start(bot_token=bot_token)
 
-ASK_KEYS = ""
+
+class Messages(Enum):
+    ASK_KEYS = ""
+    ASK_LOGIN = (
+        "Ваш ID не зарегестрирован!",
+        " Пожалуйста, введите комманду /login, чтобы продолжить.",
+    )

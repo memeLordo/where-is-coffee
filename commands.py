@@ -2,12 +2,12 @@ import asyncio
 
 from telethon import events
 
-from config import ASK_KEYS, bot
+from config import Messages, bot
 from database import check_db
 
 
 async def ask_for_keys(event):
-    await event.respond(ASK_KEYS)
+    await event.respond(Messages.ASK_KEYS)
     await asyncio.sleep(1)
     pass
 
@@ -22,7 +22,7 @@ async def start(event):
 
     # sender = await event.get_sender()
     check_db(event.sender_id)
-    await event.respond("Hi!")
+    await event.respond(Messages.ASK_LOGIN)
     raise events.StopPropagation
 
 
