@@ -3,6 +3,7 @@ import asyncio
 from telethon import events
 
 from config import ASK_KEYS, bot
+from database import check_db
 
 
 async def ask_for_keys(event):
@@ -19,6 +20,7 @@ async def start(event):
     # from the account start searching for chats
     # return links for chats
     await ask_for_keys(event)
+    check_db(event.sender_id)
     await event.respond("Hi!")
     raise events.StopPropagation
 
