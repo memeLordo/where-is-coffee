@@ -21,8 +21,8 @@ async def start(event):
     # return links for chats
 
     # sender = await event.get_sender()
-    check_db(event.sender_id)
-    await event.respond(Messages.ASK_LOGIN)
+    if check_db(event.sender_id):
+        await event.respond(Messages.ASK_LOGIN)
     raise events.StopPropagation
 
 

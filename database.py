@@ -30,5 +30,5 @@ def show_db():
 # print(show_db())
 #
 #
-# def check_db(id):
-#     return db.loc[id]
+def check_db(id):
+    return pd.isnull(db.loc[id])
