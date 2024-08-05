@@ -25,5 +25,10 @@ def show_db():
     return db.loc[:, ["TELEGRAM_ID", "API_ID", "API_HASH"]]
 
 
+row1 = convert_to_form(11, 12, "lol1")
+add_to_db(row1)
+print(show_db())
+
+
 def check_db(id):
     return db.loc[id]
