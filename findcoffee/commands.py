@@ -4,6 +4,7 @@ from loguru import logger
 from telethon import events
 
 from .config import Messages, bot
+from .database.orm import ORM
 
 
 async def ask_for_keys(event):
@@ -21,7 +22,7 @@ async def start(event):
     # login in client via .env.client
     # from the account start searching for chats
     # return links for chats
-
+    print(ORM.get_user(sender.id))
     # if check_db(event.sender_id):
     #     logger.info("New user logged in.")
     #     logger.debug(f"User id: {event.sender_id}")
