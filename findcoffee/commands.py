@@ -8,7 +8,15 @@ from .database.orm import ORM
 
 
 async def ask_for_keys(event):
-    await event.respond(Messages.ASK_KEYS)
+    async with bot.conversation(event.user_id) as conv:
+
+        await conv.send_message(Messages.ASK_KEYS[0])
+        api_id = await conv.get_response()
+        await conv.send_message(Messages.ASK_KEYS[1])
+        api_hash = await conv.get_response()
+        ORM.insert_user(event.user_id, api_id, api_hash)
+        # Continue with the conversation
+        await conv.send_message("Done!")
     await asyncio.sleep(1)
     pass
 
