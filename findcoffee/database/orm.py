@@ -9,10 +9,8 @@ class ORM:
 
     @staticmethod
     def create_tables():
-        engine.echo = True
         # Base.metadata.drop_all(engine)
         Base.metadata.create_all(engine)
-        engine.echo = False
 
     @staticmethod
     def insert_user(telegram_id, api_id, api_hash):
