@@ -13,7 +13,7 @@ bot = TelegramClient("./sessions/bot", bot_id, bot_hash).start(
 
 
 class Messages:
-    ASK_KEYS = "lol"
+    ASK_KEYS = ["Введите ваш API_ID.", "Введите ваш API_HASH."]
     ASK_LOGIN = str(
         "Ваш ID не зарегестрирован!"
         + " Пожалуйста, введите комманду /login, чтобы продолжить."
