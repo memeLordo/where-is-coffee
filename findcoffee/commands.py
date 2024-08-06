@@ -22,11 +22,12 @@ async def start(event):
     # login in client via .env.client
     # from the account start searching for chats
     # return links for chats
-    print(ORM.get_user(sender.id))
-    # if check_db(event.sender_id):
-    #     logger.info("New user logged in.")
-    #     logger.debug(f"User id: {event.sender_id}")
-    #     await event.respond(Messages.ASK_LOGIN)
+    if ORM.get_user(sender.id) is None:
+        # ORM.insert_user(sender.id, 2, "102")
+        logger.info("New user logged in.")
+        logger.debug(f"User id: {sender.id}")
+        await event.respond(Messages.ASK_LOGIN)
+    # ORM.select_users()
     raise events.StopPropagation
 
 
