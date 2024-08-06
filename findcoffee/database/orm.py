@@ -1,8 +1,8 @@
 from loguru import logger
 from sqlalchemy import select
 
-from ..database import Base, engine, session_factory
-from ..model import UserORM
+from .database import Base, engine, session_factory
+from .model import UserORM
 
 
 class ORM:

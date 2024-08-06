@@ -2,7 +2,7 @@ from typing import Annotated
 
 from sqlalchemy.orm import Mapped, mapped_column
 
-from ..database import Base
+from .database import Base
 
 primory_key = Annotated[int, mapped_column(primary_key=True)]
 
