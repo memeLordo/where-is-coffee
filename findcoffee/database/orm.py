@@ -9,7 +9,7 @@ class ORM:
 
     @staticmethod
     def create_tables():
-        # Base.metadata.drop_all(engine)
+        Base.metadata.drop_all(engine)
         Base.metadata.create_all(engine)
 
     @staticmethod
@@ -28,7 +28,7 @@ class ORM:
     @staticmethod
     def get_user(telegram_id: int):
         with session_factory() as session:
-            return session.get(UserORM, telegram_id).scalars().all()
+            return session.get(UserORM, telegram_id)
 
     @staticmethod
     def select_users():
