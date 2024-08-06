@@ -28,6 +28,11 @@ class ORM:
             session.commit()
 
     @staticmethod
+    def get_user(telegram_id: int):
+        with session_factory() as session:
+            return session.get(UserORM, telegram_id).scalars().all()
+
+    @staticmethod
     def select_users():
         with session_factory() as session:
             query = select(UserORM)
