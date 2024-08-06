@@ -15,7 +15,7 @@ async def ask_for_keys(event):
 @bot.on(events.NewMessage(pattern="/start"))
 async def start(event):
     sender = await event.get_sender()
-    logger.info(f"/start initiated by {sender.first_name}")
+    logger.info(f"/start initiated by {sender.username}")
     # ask for keys
     # save keys into .env.client
     # login in client via .env.client
