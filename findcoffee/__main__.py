@@ -4,7 +4,7 @@ from .config import bot
 from .database import open_keys
 
 logger.add(
-    "bot_session.log",
+    "sessions/bot_session.log",
     format="{time:DD-MM-YYYY at HH:mm:ss} | {level} | {message}",
     level="INFO",
     rotation="2 MB",
