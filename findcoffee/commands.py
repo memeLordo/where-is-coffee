@@ -4,7 +4,6 @@ from loguru import logger
 from telethon import events
 
 from .config import Messages, bot
-from .database import check_db
 
 
 async def ask_for_keys(event):
@@ -23,10 +22,10 @@ async def start(event):
     # from the account start searching for chats
     # return links for chats
 
-    if check_db(event.sender_id):
-        logger.info("New user logged in.")
-        logger.debug(f"User id: {event.sender_id}")
-        await event.respond(Messages.ASK_LOGIN)
+    # if check_db(event.sender_id):
+    #     logger.info("New user logged in.")
+    #     logger.debug(f"User id: {event.sender_id}")
+    #     await event.respond(Messages.ASK_LOGIN)
     raise events.StopPropagation
 
 
