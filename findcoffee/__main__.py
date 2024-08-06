@@ -1,7 +1,7 @@
 from loguru import logger
 
 from .config import bot
-from .database import open_keys
+from .database.orm import ORM
 
 logger.add(
     "sessions/bot_session.log",
@@ -16,7 +16,7 @@ logger.add(
 @logger.catch
 def main():
     """Start the bot."""
-    open_keys()
+    ORM.create_tables()
     logger.info("Bot started.")
     bot.run_until_disconnected()
 
