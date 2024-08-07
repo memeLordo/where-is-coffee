@@ -7,6 +7,9 @@ def timeout_handler():
 
             try:
                 return await func(*args, **kwargs)
+            except TimeoutError as e:
+                logger.error(f"Caught {repr(e)}")
+                # print("Got error! ", repr(e))
 
         return wrapped
 
