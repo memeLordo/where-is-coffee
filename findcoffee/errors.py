@@ -25,6 +25,8 @@ def timeout_handler():
                 except CancelledError:
                     try:
                         return await func(*args, **kwargs)
+                    except (TimeoutError, CancelledError):
+                        pass
                     except Exception as e:
                         logger.exception(f"{repr(e)} still Unresolved")
 
