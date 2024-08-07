@@ -1,5 +1,3 @@
-import asyncio
-
 from loguru import logger
 from telethon import events
 
@@ -25,8 +23,6 @@ async def ask_for_keys(event):
         ORM.insert_user(event.sender_id, api_id, api_hash)
         # Continue with the conversation
         await conv.send_message("Done!")
-    await asyncio.sleep(1)
-    pass
 
 
 @bot.on(events.NewMessage(pattern="/start"))
