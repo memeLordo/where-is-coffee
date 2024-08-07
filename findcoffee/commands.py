@@ -5,8 +5,10 @@ from telethon import events
 
 from .config import Messages, bot
 from .database.orm import ORM
+from .errors import timeout_handler
 
 
+@timeout_handler()
 async def ask_for_keys(event):
     async with bot.conversation(event.sender_id) as conv:
         # TODO: ass value check
