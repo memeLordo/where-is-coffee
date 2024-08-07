@@ -2,13 +2,11 @@ from loguru import logger
 
 from .config import bot, bot_token
 from .database.orm import ORM
-from .errors import handled_errors
 
 
 @logger.catch
-def main():
+def start_bot():
     """Start the bot."""
-    ORM.create_tables()
     logger.info("Bot started.")
     try:
         bot.run_until_disconnected()
@@ -22,4 +20,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    ORM.create_tables()
+    start_bot()

@@ -5,7 +5,7 @@ from loguru import logger
 from .config import bot
 
 
-def timeout_handler():
+def error_handler(errors=(Exception,), err_message=" "):
 
     def wrapper(func):
 
@@ -13,30 +13,18 @@ def timeout_handler():
 
             try:
                 return await func(*args, **kwargs)
-            except TimeoutError as e:
-                logger.warning(f"{func.__name__}: {repr(e)} occured.")
-                # print("Got error! ", repr(e))
-                try:
-                    event = args[0]
-                    await bot.send_message(
-                        event.sender,
-                        message="Ошибка запроса, повторите попытку.",
-                    )
-                except CancelledError:
-                    try:
-                        return await func(*args, **kwargs)
-                    except (TimeoutError, CancelledError):
-                        pass
-                    except Exception as e:
-                        logger.exception(f"{repr(e)} still Unresolved")
+            except errors as e:
+                logger.error(f"{func.__name__}: {repr(e)} occured.")
+                event = args[0]
+                await bot.send_message(
+                    event.sender,
+                    message=err_message,
+                )
+                logger.info("Reply message sent.")
 
         return wrapped
 
     return wrapper
 
 
-handled_errors = (
-    TimeoutError,
-    CancelledError,
-    Exception,
-)
+timeout_handler = error_handler((TimeoutError,), err_message="Ошибка.")
