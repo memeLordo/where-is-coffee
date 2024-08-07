@@ -64,6 +64,13 @@ async def login(event):
     pass
 
 
+@bot.on(events.NewMessage(pattern="/exit"))
+async def exit(event):
+    async with bot.conversation(event.sender, exclusive=False) as conv:
+        await conv.cancel_all()
+        await event.respond("Operation is cancelled.")
+
+
 # @bot.on(events.NewMessage)
 # async def echo(event):
 #     await event.respond(event.text)
