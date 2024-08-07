@@ -14,10 +14,9 @@ def timeout_handler():
             try:
                 return await func(*args, **kwargs)
             except TimeoutError as e:
-                logger.error(f"Caught {repr(e)}")
+                logger.warning(f"{func.__name__}: {repr(e)} occured.")
                 # print("Got error! ", repr(e))
                 try:
-
                     event = args[0]
                     await bot.send_message(
                         event.sender,
