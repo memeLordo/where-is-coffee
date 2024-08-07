@@ -1,3 +1,4 @@
+from asyncio.exceptions import CancelledError
 
 from loguru import logger
 
@@ -27,6 +28,14 @@ def timeout_handler():
                     await send_message(
                         message="Ошибка запроса, повторите попытку.",
                     )
+                except CancelledError:
+                    try:
+                        return await func(*args, **kwargs)
+                    except Exception as e:
+                        logger.exception(f"{repr(e)} still Unresolved")
+                        await send_message(
+                            message="Ошибка сервера, попробуйте попытку позже",
+                        )
         return wrapped
 
     return wrapper
