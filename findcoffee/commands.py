@@ -3,20 +3,20 @@ import asyncio
 from loguru import logger
 from telethon import events
 
-from .config import Messages, bot
+from .config import Message, bot
 from .database.orm import ORM
 from .errors import timeout_handler
 
 
 @timeout_handler
 async def ask_for_keys(event):
-    async with bot.conversation(event.sender_id) as conv:
+    async with bot.conversation(event.sender) as conv:
         # TODO: ass value check
-        await conv.send_message(Messages.ASK_KEYS[0])
+        await conv.send_message(Message.KEYS[0])
         _id = await conv.get_response()
         api_id = int(_id.message)
 
-        await conv.send_message(Messages.ASK_KEYS[1])
+        await conv.send_message(Message.KEYS[1])
         _hash = await conv.get_response()
         api_hash = _hash.message
 
@@ -40,7 +40,7 @@ async def start(event):
         # ORM.insert_user(sender.id, 2, "102")
         logger.info("New user logged in.")
         logger.debug(f"User id: {event.sender_id}")
-        await event.respond(Messages.ASK_LOGIN)
+        await event.respond(Message.LOGIN)
     # ORM.select_users()
     raise events.StopPropagation
 
