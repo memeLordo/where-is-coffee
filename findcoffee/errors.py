@@ -33,3 +33,4 @@ def error_handler(errors=(Exception,), err_message=" "):
 
 
 timeout_handler = error_handler((TimeoutError,), err_message="Ошибка.")
+value_error_handler = error_handler(ValueError, "Неверное значение.")
