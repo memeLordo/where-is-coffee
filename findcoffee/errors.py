@@ -39,3 +39,10 @@ def timeout_handler():
         return wrapped
 
     return wrapper
+
+
+handled_errors = (
+    TimeoutError,
+    CancelledError,
+    Exception,
+)
