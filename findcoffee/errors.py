@@ -11,13 +11,6 @@ def timeout_handler():
 
         async def wrapped(*args, **kwargs):
 
-            async def send_message(event=args[0], message=" "):
-                async with bot:
-                    await bot.send_message(
-                        event.sender,
-                        message,
-                    )
-
             try:
                 return await func(*args, **kwargs)
             except TimeoutError as e:
@@ -25,7 +18,9 @@ def timeout_handler():
                 # print("Got error! ", repr(e))
                 try:
 
-                    await send_message(
+                    event = args[0]
+                    await bot.send_message(
+                        event.sender,
                         message="Ошибка запроса, повторите попытку.",
                     )
                 except CancelledError:
@@ -33,9 +28,7 @@ def timeout_handler():
                         return await func(*args, **kwargs)
                     except Exception as e:
                         logger.exception(f"{repr(e)} still Unresolved")
-                        await send_message(
-                            message="Ошибка сервера, попробуйте попытку позже",
-                        )
+
         return wrapped
 
     return wrapper
