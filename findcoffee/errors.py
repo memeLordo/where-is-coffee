@@ -6,10 +6,7 @@ def timeout_handler():
         async def wrapped(*args, **kwargs):
 
             try:
-                return func(*args, **kwargs)
-            except errors as e:
-                print("Got error! ", repr(e))
-                return default_value
+                return await func(*args, **kwargs)
 
         return wrapped
 
