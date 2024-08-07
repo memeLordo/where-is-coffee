@@ -32,5 +32,5 @@ def error_handler(errors=(Exception,), err_message=" "):
     return wrapper
 
 
-timeout_handler = error_handler((TimeoutError,), err_message="Ошибка.")
+timeout_handler = error_handler(TimeoutError, "Превышено время ожидания.")
 value_error_handler = error_handler(ValueError, "Неверное значение.")
