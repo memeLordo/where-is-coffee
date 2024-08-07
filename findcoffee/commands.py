@@ -13,12 +13,13 @@ from .errors import timeout_handler, value_error_handler
 async def ask_for_keys(event):
     async with bot.conversation(event.sender) as conv:
         # TODO: ass value check
+        timeout = 10
         await conv.send_message(Message.KEYS[0])
-        _id = await conv.get_response()
+        _id = await conv.get_response(timeout=timeout)
         api_id = int(_id.message)
 
         await conv.send_message(Message.KEYS[1])
-        _hash = await conv.get_response()
+        _hash = await conv.get_response(timeout=timeout)
         api_hash = _hash.message
 
         ORM.insert_user(event.sender_id, api_id, api_hash)
