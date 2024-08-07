@@ -9,10 +9,15 @@ from .database.orm import ORM
 
 async def ask_for_keys(event):
     async with bot.conversation(event.sender_id) as conv:
+        # TODO: ass value check
         await conv.send_message(Messages.ASK_KEYS[0])
-        api_id = await conv.get_response()
+        _id = await conv.get_response()
+        api_id = int(_id.message)
+
         await conv.send_message(Messages.ASK_KEYS[1])
-        api_hash = await conv.get_response()
+        _hash = await conv.get_response()
+        api_hash = _hash.message
+
         ORM.insert_user(event.sender_id, api_id, api_hash)
         # Continue with the conversation
         await conv.send_message("Done!")
