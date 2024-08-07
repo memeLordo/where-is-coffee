@@ -1,4 +1,4 @@
-from asyncio.exceptions import CancelledError
+from asyncio.exceptions import TimeoutError
 
 from loguru import logger
 
