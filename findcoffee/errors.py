@@ -1,14 +1,16 @@
-def error_handler(errors=(Exception,), default_value=""):
 
-    def decorator(func):
+def timeout_handler():
 
-        def wrapper(*args, **kwargs):
+    def wrapper(func):
+
+        async def wrapped(*args, **kwargs):
+
             try:
                 return func(*args, **kwargs)
             except errors as e:
                 print("Got error! ", repr(e))
                 return default_value
 
-        return wrapper
+        return wrapped
 
-    return decorator
+    return wrapper
