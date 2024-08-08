@@ -1,5 +1,5 @@
 from loguru import logger
-from sqlalchemy import select
+from sqlalchemy import exists, select
 
 from .database import Base, engine, session_factory
 from .model import UserORM
@@ -48,3 +48,10 @@ class ORM:
                 user.__setattr__(parametr, value)
             session.refresh(user)
             session.commit()
+
+    @staticmethod
+    def is_user_exist(user_id):
+        with session_factory() as session:
+            return session.query(
+                exists().where(UserORM.telegram_id == user_id)
+            ).scalar()
