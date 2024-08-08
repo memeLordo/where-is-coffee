@@ -17,9 +17,8 @@ def error_handler(errors=(Exception,), err_message=" "):
                 return await func(*args, **kwargs)
 
             except TimeoutError:
-                logger.info(f"{func.__name__}: aborted.")
                 await bot.send_message(event.sender, message=err_message)
-                return await command.exit(event)
+                return await command.exit(event, func.__name__)
 
             except errors as e:
                 logger.error(f"{func.__name__}: {repr(e)} occured.")

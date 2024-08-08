@@ -75,9 +75,10 @@ async def login(event):
 
 
 @bot.on(events.NewMessage(pattern="/exit"))
-async def exit(event):
+async def exit(event, func_name="Comand"):
     async with bot.conversation(event.sender, exclusive=False) as conv:
         await conv.cancel_all()
+        logger.info(f"{func_name}: aborted.")
         await event.respond("Operation is cancelled.")
 
 
