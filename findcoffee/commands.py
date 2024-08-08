@@ -73,8 +73,12 @@ async def help(event):
 @bot.on(events.NewMessage(pattern="/login"))
 async def login(event):
     # logging in...
-    await ask_for_keys(event)
-    pass
+    logger.debug(ORM.is_user_exist(event.sender_id))
+    if ORM.is_user_exist(event.sender_id):
+        await event.respond("You are already have an account.")
+    else:
+        await ask_for_keys(event)
+    await create_client(event)
 
 
 @bot.on(events.NewMessage(pattern="/exit"))
