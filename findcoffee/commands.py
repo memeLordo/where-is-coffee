@@ -5,8 +5,12 @@ from .config import Message, bot
 from .database.orm import ORM
 from .errors import timeout_handler, value_error_handler
 
+async def create_client(event):
+    print(ORM.get_user_by(event.sender_id))
+    pass
 
 @timeout_handler
+
 @value_error_handler
 async def ask_for_keys(event):
     async with bot.conversation(event.sender) as conv:
