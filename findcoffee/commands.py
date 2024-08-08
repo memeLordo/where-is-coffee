@@ -36,7 +36,7 @@ async def ask_for_keys(event):
 
         ORM.insert_user(event.sender_id, api_id, api_hash)
         # Continue with the conversation
-        await conv.send_message("Done!")
+        await conv.send_message("Done!")  # TODO: change to Message.KEYS[2]
 
 
 @bot.on(events.NewMessage(pattern="/start"))
