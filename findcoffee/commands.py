@@ -26,10 +26,12 @@ async def ask_for_keys(event):
         timeout = 60
         await conv.send_message(Message.KEYS[0])
         _id = await conv.get_response(timeout=timeout)
+        assert _id.message not in commands.keys()
         api_id = int(_id.message)
 
         await conv.send_message(Message.KEYS[1])
         _hash = await conv.get_response(timeout=timeout)
+        assert _hash.message not in commands.keys()
         api_hash = _hash.message
 
         ORM.insert_user(event.sender_id, api_id, api_hash)

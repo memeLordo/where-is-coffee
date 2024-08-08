@@ -16,6 +16,8 @@ def error_handler(errors=(Exception,), err_message=" "):
                 event = args[0]
                 return await func(*args, **kwargs)
 
+            except AssertionError:
+                return
             except TimeoutError:
                 await bot.send_message(event.sender, message=err_message)
                 return await command.exit(event, func.__name__)
