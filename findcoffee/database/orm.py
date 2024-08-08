@@ -26,9 +26,9 @@ class ORM:
             session.commit()
 
     @staticmethod
-    def get_user(telegram_id: int):
+    def get_user_by(user_id: int):
         with session_factory() as session:
-            return session.get(UserORM, telegram_id)
+            return session.query(UserORM).filter(UserORM.telegram_id == user_id).one()
 
     @staticmethod
     def select_users():
