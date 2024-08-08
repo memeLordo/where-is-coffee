@@ -5,6 +5,15 @@ from .config import Message, bot
 from .database.orm import ORM
 from .errors import timeout_handler, value_error_handler
 
+commands = {
+    "/start": "message",
+    "/login": "message",
+    "/search": "message",
+    "/help": "message",
+    "/exit": "message",
+}
+
+
 async def create_client(event):
     print(ORM.get_user_by(event.sender_id))
     pass
