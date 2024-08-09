@@ -23,9 +23,11 @@ async def create_client(event):
     global client
     user = ORM.get_user_by(event.sender_id)
     # logger.debug(user)
+    phone = "Some phone."
     client = TelegramClient("./sessions/client", user.api_id, user.api_hash)
     async with bot.conversation(event.sender) as conv:
         await conv.send_message("Please enter your code.")
+        await client.connect()
 
         await client.send_code_request(phone)
         _code = await conv.get_response()
