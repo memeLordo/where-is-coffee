@@ -2,7 +2,6 @@ from loguru import logger
 from telethon import TelegramClient, events
 
 from .config import Message, bot
-from .database.model import UserORM
 from .database.orm import ORM
 from .errors import timeout_handler, value_error_handler
 
