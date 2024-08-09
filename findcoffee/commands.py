@@ -1,5 +1,5 @@
 from loguru import logger
-from telethon import events
+from telethon import TelegramClient, events
 
 from .config import Message, bot
 from .database.orm import ORM
@@ -15,8 +15,17 @@ commands = {
 
 
 async def create_client(event):
-    print(ORM.get_user_by(event.sender_id))
-    pass
+    global client
+    client = TelegramClient("./sessions/client", user.api_id, user.api_hash)
+
+        await client.send_code_request(phone)
+        _code = await conv.get_response()
+        code = _code.message
+        assert code not in commands.keys()
+        # telethon.errors.rpcerrorlist.PhoneCodeInvalidError
+        # ConnectionError
+        # possible auth errors: https://tl.telethon.dev/methods/auth/send_code.html
+        await client.sign_in(phone, code)
 
 
 @timeout_handler
