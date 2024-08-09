@@ -21,18 +21,7 @@ async def find_bot():
 
 async def create_client(event):
     global client
-    # user = ORM.get_user_by(event.sender_id)
-    user = UserORM(
-        telegram_id=event.sender_id,
-        api_id=25065727,
-        api_hash="3a71d090e43792526725d63bef945ce3",
-    )
-    # logger.debug(user)
-    phone = "+79117989288"
     client = TelegramClient("./sessions/client", user.api_id, user.api_hash)
-    async with bot.conversation(event.sender) as conv:
-        await conv.send_message("Please enter your code.")
-        await client.connect()
 
         await client.send_code_request(phone)
         _code = await conv.get_response()
