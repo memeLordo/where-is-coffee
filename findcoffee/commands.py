@@ -16,6 +16,8 @@ commands = {
 
 async def create_client(event):
     global client
+    user = ORM.get_user_by(event.sender_id)
+    # logger.debug(user)
     client = TelegramClient("./sessions/client", user.api_id, user.api_hash)
 
         await client.send_code_request(phone)
