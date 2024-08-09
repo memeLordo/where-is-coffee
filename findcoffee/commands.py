@@ -1,7 +1,8 @@
 from loguru import logger
-from telethon import events
+from telethon import TelegramClient, events
 
 from .config import Message, bot
+from .database.model import UserORM
 from .database.orm import ORM
 from .errors import timeout_handler, value_error_handler
 
@@ -14,9 +15,33 @@ commands = {
 }
 
 
-async def create_client(event):
-    print(ORM.get_user_by(event.sender_id))
+async def find_bot():
     pass
+
+
+async def create_client(event):
+    global client
+    # user = ORM.get_user_by(event.sender_id)
+    user = UserORM(
+        telegram_id=event.sender_id,
+        api_id=25065727,
+        api_hash="3a71d090e43792526725d63bef945ce3",
+    )
+    # logger.debug(user)
+    phone = "+79117989288"
+    client = TelegramClient("./sessions/client", user.api_id, user.api_hash)
+    async with bot.conversation(event.sender) as conv:
+        await conv.send_message("Please enter your code.")
+        await client.connect()
+
+        await client.send_code_request(phone)
+        _code = await conv.get_response()
+        code = _code.message
+        assert code not in commands.keys()
+        # telethon.errors.rpcerrorlist.PhoneCodeInvalidError
+        # ConnectionError
+        # possible auth errors: https://tl.telethon.dev/methods/auth/send_code.html
+        await client.sign_in(phone, code)
 
 
 @timeout_handler
@@ -61,7 +86,10 @@ async def start(event):
 @bot.on(events.NewMessage(pattern="/search"))
 async def search(event):
     # searching...
-    pass
+    await create_client(event)
+    # client.start()
+    # with client:
+    #     client.loop.run_until_complete(find_bot())
 
 
 @bot.on(events.NewMessage(pattern="/help"))

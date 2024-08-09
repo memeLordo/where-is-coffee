@@ -1,7 +1,7 @@
 from dotenv import dotenv_values
 from telethon import TelegramClient
 
-env_config = dotenv_values(".env.bot")
+env_config = dotenv_values(".env.script")
 
 bot_id = env_config["BOT_ID"]
 bot_hash = env_config["BOT_HASH"]
