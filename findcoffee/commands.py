@@ -34,6 +34,26 @@ async def create_client(event):
         await client.sign_in(phone, code)
 
 
+async def create_client(event):
+    global client
+    user = ORM.get_user_by(event.sender_id)
+    # logger.debug(user)
+    phone = "Some phone."
+    client = TelegramClient("./sessions/client", user.api_id, user.api_hash)
+    async with bot.conversation(event.sender) as conv:
+        await conv.send_message("Please enter your code.")
+        await client.connect()
+
+        await client.send_code_request(phone)
+        _code = await conv.get_response()
+        code = _code.message
+        assert code not in commands.keys()
+        # telethon.errors.rpcerrorlist.PhoneCodeInvalidError
+        # ConnectionError
+        # possible auth errors: https://tl.telethon.dev/methods/auth/send_code.html
+        await client.sign_in(phone, code)
+
+
 @timeout_handler
 @value_error_handler
 async def ask_for_keys(event):
@@ -76,7 +96,10 @@ async def start(event):
 @bot.on(events.NewMessage(pattern="/search"))
 async def search(event):
     # searching...
-    pass
+    await create_client(event)
+    # client.start()
+    # with client:
+    #     client.loop.run_until_complete(find_bot())
 
 
 @bot.on(events.NewMessage(pattern="/help"))
