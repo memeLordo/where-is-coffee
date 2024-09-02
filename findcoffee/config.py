@@ -3,9 +3,9 @@ from telethon import TelegramClient
 
 env_config = dotenv_values(".env.script")
 
-bot_id = env_config["BOT_ID"]
-bot_hash = env_config["BOT_HASH"]
-bot_token = env_config["BOT_TOKEN"]
+bot_id = int(env_config["BOT_ID"] or 0)
+bot_hash = str(env_config["BOT_HASH"] or None)
+bot_token = str(env_config["BOT_TOKEN"] or None)
 
 bot = TelegramClient("./sessions/bot", bot_id, bot_hash).start(
     bot_token=bot_token,
